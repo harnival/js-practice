@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="radio" name="1" id="ra0" class="radio">
+    <input type="radio" name="1" id="ra1" class="radio">
+    <input type="radio" name="1" id="ra2" class="radio">
+    <input type="radio" name="1" id="ra3" class="radio">
+    <input type="radio" name="1" id="ra4" class="radio">
+    <input type="radio" name="1" id="ra5" class="radio">
+
+    <button>go</button>
+   
+    <script>
+        const array1 = document.querySelectorAll(".radio");
+        let i = 0 ;
+        let j = 0 ;
+        function rrr() {           
+            const on = array1[i];
+            on.checked = "true";
+            if (i==5) {
+                i = 0 ;
+
+            } else {
+                i += 1 ;
+            }      
+        }
+        const ppp = setInterval(() => {
+            rrr();
+            j += 1;
+            if (j>100) {
+                return clearInterval(ppp);
+            }
+        },100);
+
+        
+        
+        
+            
+
+        
+
+
+    </script>
+</body>
+</html>

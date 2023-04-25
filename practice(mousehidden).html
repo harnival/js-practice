@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ranking {
+            border: 2px dotted gray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 250px;
+        }
+        .ranking_image {
+            margin: 10px;
+            padding: 0px;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            position: relative;
+        }
+        .ranking_poster {
+            width: 100%;
+            border-radius: 30px;
+        }
+        .ranking_exp {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        .ranking_exp >div {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+
+            display: flex;
+            flex-direction: column;
+            width: 30px;
+        }
+        .ranking_exp >img {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+        .ranking_exp >span {
+            position: absolute;
+            bottom: -19px;
+            left: 15%;
+
+            font-size: 80px;
+            font-style: italic;
+            color: white;
+        }
+        .d_day {
+            width: 100%;
+            height: 30px;
+            margin-top: 10px;
+            background-color: white;
+            color: red;
+            border-radius: 3px;
+
+            font-size: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ranking_title {
+            height: 100px;
+        }
+        .ranking_review {
+            width: 70%;
+            margin-bottom: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .ranking_detail {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.253);
+            z-index: 10;
+
+        }
+ 
+        .ranking_detail a {
+            border-radius: 20px;
+            background-color: rgba(141, 133, 245, 0.753);
+            width: 100px;
+            height: 35px;
+            margin: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            outline: none;
+            color: black;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="ranking"> 
+        <div class="ranking_image">
+            <img
+                class="ranking_poster" 
+                src="images/comming1.jpg" 
+                alt="스즈메의 문단속"/>
+    
+            <div class="ranking_exp">
+                <div>
+                    <img src="images/12.svg" alt="12세이상관람가">
+                    <strong class="d_day">D-2</strong>
+                </div>
+                <img src="images/imax_white.png" alt="IMAX">
+                <span>1</span>
+            </div>
+            <div class="ranking_detail">
+                <a href="#">상세보기</a>
+                <a href="#">예매하기</a>
+            </div>
+        </div>
+        <div class="ranking_title">
+            <strong>스즈메의 문단속</strong>
+        </div>
+        <div class="ranking_review">
+            <p>
+                <img src="images/eggGoldeneggPreegg.png" alt="등급:일반">
+                99%
+            </p>
+            <div style="width: 1px; height: 10px; background-color: gray;"></div>
+            <p>예매율 38.4%</p>
+        </div>
+
+    </div>
+
+    <button id="ggg">ddddddd</button>
+    <script>
+        const detail = document.querySelector(".ranking_detail");
+        const image = document.querySelector(".ranking_image");
+        const hideMe = () => {
+            detail.style["display"] = "hidden";
+        }
+        const showMe = () => {
+            detail.style.display = "flex";
+        }
+        image.addEventListener("mouseup", hideMe);
+        image.addEventListener("mousedown", showMe);
+        
+
+
+
+    </script>
+</body>
+</html>

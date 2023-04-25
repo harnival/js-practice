@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* https://studiomeal.com/archives/533 */
+        main {
+            background-color: lightgray;
+            width: 800px;
+            height: 800px;
+
+            display: grid;
+            /* grid-template-rows: repeat(3,1fr);
+            grid-template-columns: repeat(4,1fr); */
+            grid-template:
+                "b a  a" 1fr
+                "b e  c" 1fr
+                "d d  c" 1fr/ 1fr 1fr 1fr
+            ;
+            gap: 10px;
+        }
+        main >div {
+            border: 2px dashed gray;
+            scroll-behavior: smooth;
+            scroll-snap-align: end;
+        }
+        .g1 {
+            grid-area: a;
+            overflow-y: hidden;
+        }
+        .g2 {
+            grid-area: b;
+            overflow-x: hidden;
+        }
+        .g3 {
+            grid-area: c;
+            overflow-x: hidden;
+        }
+        .g4 {
+            grid-area: d;
+            overflow-y: hidden;
+        }
+        .gButton {
+            grid-area: e;
+
+        }
+        .upgra {
+            width: 100%;
+            height: 400%;
+            background: linear-gradient(to top, tomato,white);
+        }
+        .downgra {
+            width: 100%;
+            height: 400%;
+            background: linear-gradient(to bottom, palegreen,white);
+        }
+        .leftgra {
+            width: 400%;
+            height: 100%;
+            background: linear-gradient(to left, royalblue,white);
+        }
+        .rightgra {
+            width: 400%;
+            height: 100%;
+            background: linear-gradient(to right, beige,white);
+        }
+    </style>
+</head>
+<body>
+    <main id="main">
+        <div class="g1">
+            <div class="upgra">1</div>
+        </div>
+        <div class="g2">
+            <div class="leftgra">2</div>
+        </div>
+        <div class="g3">
+            <div class="rightgra">3</div>
+        </div>
+        <div class="g4">
+            <div class="downgra">4</div>
+        </div>
+        <div class="gButton">
+            <button class="gButton_b">fffffff</button>
+        </div>
+    </main>
+    <script>
+        const g1 = document.querySelector(".g1");
+        const g2 = document.querySelector(".g2");
+        const g3 = document.querySelector(".g3");
+        const g4 = document.querySelector(".g4");
+        const gButton = document.querySelector(".gButton_b");
+        const allG = document.querySelectorAll("main>div");
+
+        g1.scroll({top : 0 });
+        g2.scroll({left : 0 });
+        g3.scroll({left : g3.scrollWidth});
+        g4.scroll({top : g4.scrollHeight})
+
+        gButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            g1.scrollBy(0,g1.clientHeight);
+            g2.scrollBy(g2.clientWidth,0);
+            g3.scrollBy(-g3.clientWidth,0);
+            g4.scrollBy(0, -g4.clientHeight);
+
+        })
+
+
+
+    </script>
+</body>
+</html>

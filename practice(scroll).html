@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0px;
+        margin: 0px;
+      }
+      main {
+        width: fit-content;
+        height: 80vh;
+        padding: 0px;
+        margin: auto;
+        border: 3px solid royalblue;
+
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
+      }
+      .scrollPage {
+        scroll-snap-align: start;
+
+        width: 300px;
+        height: 1000px;
+        margin: 10px;
+        border: 3px dashed gray;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">FFFFFFFFFFFFFFFFF</button>
+    <main id="main">
+      <div class="scrollPage" style="background-color: tomato"></div>
+      <div class="scrollPage" style="background-color: palegreen"></div>
+      <div class="scrollPage" style="background-color: darkcyan"></div>
+      <div class="scrollPage" style="background-color: paleturquoise"></div>
+    </main>
+
+    <script>
+      const btn = document.querySelector(".btn");
+      const main = document.querySelector("main");
+      const page = document.getElementsByClassName("scrollPage");
+      const mainHeight = main.scrollHeight;
+      const pageHeight = page[0].clientHeight;
+      let i = 0;
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        main.scrollBy(0, pageHeight);
+
+        // if (mainHeight - i > pageHeight ) {
+        //     i += pageHeight;
+        //     main.scroll(0,i);
+        //     main.scroll({top: i});
+        // } else {
+        //     main.scroll(0,mainHeight);
+        //     i=0
+        // }
+        // https://developer.mozilla.org/ko/docs/Web/API/Window/scrollBy
+      });
+    </script>
+  </body>
+</html>

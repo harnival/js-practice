@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<title>GeoLocation</title>
+<style type="text/css">
+/*<[CDATA[*/
+	html, body, #map_canvas {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+	}
+/*]]>*/
+</style>
+<script type="text/javascript">
+//<![CDATA[
+	 bind(window, 'load', function () {
+		geolocationInit();
+	});
+
+// 이벤트 할당
+function bind(elem, type, handler, capture) {
+	type = typeof type === 'string' && type || '';
+	handler = handler || function () { ; };
+
+	if (elem.addEventListener) {
+		elem.addEventListener(type, handler, capture);
+	}
+	else if (elem.attachEvent) {
+		elem.attachEvent('on' + type, handler);
+	}
+	 return elem;
+};
+
+ function geolocationInit() {
+	 if (navigator.geolocation) {
+		var geo = navigator.geolocation;
+		geo.getCurrentPosition(
+			(pos) => {mapInit(pos.coords.latitude, pos.coords.longitude);}
+			,
+			(e) => { msg({
+					0: '위치정보 검색에 문제가 발생했습니다. (msg:' + e.message + ')',
+					1: '현재 페이지에서 사용자가 위치 정보 검색을 거부했습니다.',
+					2: '브라우저가 위치정보를 검색하지 못했습니다.(msg:' + e.message + ')',
+					3: '브라우저가 위치 정보 검색 시간을 초과했습니다.'
+					}[e.code]);
+
+					} 
+			, 
+			{enableHighAccuracy: false, timeout: 10000, maximumAge: 0}
+			);
+	}
+	else {
+		alert('HTML 5 지오로케이션을 지원하지 않는 브라우저입니다.');
+	}
+}
+
+function msg(msg) {
+	alert(msg);
+}
+//]]>
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+//<![CDATA[
+ function mapInit(latitude, longitude) {
+	var opt = {
+		zoom: 15,
+		center: new google.maps.LatLng(latitude, longitude),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	var map = new google.maps.Map(document.getElementById('map_canvas'), opt);
+};
+//]]>
+</script>
+</head>
+
+<body>
+	<div id="map_canvas"></div>
+</body>
+</html>

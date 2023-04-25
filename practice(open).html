@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* --roots----------------------------------- */
+      :root {
+        --animation-time: 0.5s;
+      }
+      /* ----------------------------------------- */
+      body {
+        margin: 0px;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+      }
+      .card {
+        display: block;
+        height: 100%;
+        width: calc(100% / 4);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: var(--animation-time) ease;
+      }
+      .back {
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(rgba(0, 0, 0, 0.322) 60%, black);
+        transition: 1s ease-in-out;
+      }
+      .page {
+        overflow: hidden;
+      }
+      .pageOpen {
+        animation: pageOpen var(--animation-time) ease forwards;
+        display: block;
+      }
+      @keyframes pageOpen {
+        from {
+          width: 0px;
+        }
+        to {
+          width: 700px;
+        }
+      }
+      .pageClose {
+        animation: pageClose var(--animation-time) ease forwards;
+      }
+      @keyframes pageClose {
+        from {
+          width: 700px;
+        }
+        to {
+          width: 0px;
+          display: none;
+        }
+      }
+
+      .card:hover {
+        transform: scale(1.1, 1.1);
+      }
+      .card:hover > .back {
+        background: radial-gradient(rgba(255, 255, 255, 0) 70%, black);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <a
+        href="#"
+        class="card"
+        style="background-image: url(../cgv/images/comming1.jpg)"
+      >
+        <div class="back"></div>
+      </a>
+      <div class="page"></div>
+      <a
+        href="#"
+        class="card"
+        style="background-image: url(../cgv/images/comming2.jpg)"
+      >
+        <div class="back"></div>
+      </a>
+      <div class="page"></div>
+      <a
+        href="#"
+        class="card"
+        style="background-image: url(../cgv/images/comming3.jpg)"
+      >
+        <div class="back"></div>
+      </a>
+      <div class="page"></div>
+      <a
+        href="#"
+        class="card"
+        style="background-image: url(../cgv/images/comming4.jpg)"
+      >
+        <div class="back"></div>
+      </a>
+      <div class="page"></div>
+    </div>
+
+    <script>
+      // page open & close -------------------------------------
+      const card = document.querySelectorAll(".card");
+      const page = document.querySelectorAll(".page");
+      const back = document.querySelectorAll(".back");
+
+      card.forEach((x, y) => {
+        x.addEventListener("click", function () {
+          const cardArray = [...card];
+          const pageArray = [...page];
+          const backArray = [...back];
+          if (page[y].classList.contains("pageOpen")) {
+            page.forEach((n) => n.classList.replace("pageOpen", "pageClose"));
+            page[y].classList.replace("pageOpen", "pageClose");
+          } else {
+            page.forEach((n) => n.classList.replace("pageOpen", "pageClose"));
+            page[y].classList.remove("pageClose");
+            page[y].classList.add("pageOpen");
+          }
+        });
+      });
+      // -----------------------------------------------------------
+    </script>
+  </body>
+</html>

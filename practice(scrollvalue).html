@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #root {
+        width: 800px;
+        height: 800px;
+        background-color: wheat;
+        overflow: scroll;
+        position: relative;
+        margin: auto;
+      }
+      #ppp {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        font-size: 30px;
+      }
+      #ttt {
+        width: 400px;
+        height: 500vh;
+        background-color: palegreen;
+        margin: auto;
+      }
+      #yyy {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: royalblue;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <span id="ppp"></span>
+      <div id="ttt">
+        <div id="yyy"></div>
+      </div>
+    </div>
+
+    <script>
+      const root = document.getElementById("root");
+      const ppp = document.getElementById("ppp");
+      const ttt = document.getElementById("ttt");
+      const yyy = document.getElementById("yyy");
+      let n = 0;
+      root.addEventListener("scroll", function (e) {
+        e.preventDefault();
+        n += 1;
+        ppp.innerText = `${n}`;
+        // console.dir(e);
+
+        yyy.style.width = `${30 + e.target.scrollTop}px`;
+        yyy.style.height = `${30 + e.target.scrollTop}px`;
+        yyy.style.transform = `translate(${-e.target.scrollTop / 2}px,${
+          -e.target.scrollTop / 2
+        }px)`;
+      });
+    </script>
+  </body>
+</html>

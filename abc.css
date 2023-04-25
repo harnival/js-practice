@@ -1,0 +1,95 @@
+body {
+    margin: 0px;
+    background-color: #eee;
+    display: flex;
+    width: 100vw;    
+}
+div {
+    /* border: 1px dashed gray; */
+    box-sizing: border-box;
+
+}
+
+.box {
+    margin: 10px;
+    height: 300px;
+    width: 100%;
+    border: 2px dashed black;
+
+    display: flex;
+    overflow-x: hidden;
+    position: relative;
+}
+.carrier {
+    display: flex;
+    width: fit-content;
+    height: 100%;
+    background-color: teal;
+    float:right;
+    /* transform:translateX(300px); */
+    float: left;
+    position: absolute;
+    left: 0px;
+    transition: transform 1s ease;
+}
+.all_box {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+/* button area-------------------- */
+.btnbox {
+    width: 100%;
+    position: relative;
+}
+
+.left_btn, .right_btn {
+    position: absolute;
+
+    width: 30px;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.541);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: white;
+
+    border-radius: 10px;
+    text-decoration: none;
+    z-index: 10;
+    box-shadow: 1px 1px 1px 3px rgba(128, 128, 128, 0.075);
+}
+.left_btn {
+    top: 0px;
+    left: 0px;
+}
+.right_btn {
+    top: 0px;
+    right: 0px;
+}
+/* ----------------------------- */
+/* article area------------------ */
+
+.child {
+    width: 300px;
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 99, 71, 0.507);
+}
+
+p {
+    width: 100%;
+    margin: 0px;
+    overflow-wrap: break-word;
+}
+
+/* ----------------------------- */

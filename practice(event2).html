@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 400px;
+            border: 2px solid gray;
+            text-align: center;
+        }
+        li {
+            width: fit-content;
+            padding: 20px;
+            background-color: tomato;
+            margin: 0px auto 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul class="fff">
+        <li class="ggg">hhhhhhhh</li>
+        <li class="ggg">hhhhhhhh</li>
+        <li class="ggg">hhhhhhhh</li>
+        <li class="ggg">hhhhhhhh</li>
+        <li class="ggg">hhhhhhhh</li>
+    </ul>
+    <script>
+        const c = document.getElementsByClassName("ggg");
+        const d = document.querySelector(".fff");
+        const body = document.body;
+        d.addEventListener("click", function(e){ 
+            e.stopPropagation();
+            console.dir(e);
+            if (e.target.tagName == "UL") { return;}
+            else{d.style.backgroundColor = "black";}
+        })
+        body.addEventListener("click", function() {
+            body.style.backgroundColor = "tomato";
+        })
+
+        // for ( let i=0; i < c.length; i++) {
+        //     c[i].onclick = (e) => {
+        //         d.style.backgroundColor = "black";
+        //     }
+        // }
+    </script>
+</body>
+</html>

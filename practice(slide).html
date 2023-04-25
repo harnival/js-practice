@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="abc.css" />
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+        <div class="btnbox">
+            <a href="#" class="left_btn" >&lt;</a>
+            <a href="#" class="right_btn">&gt;</a>
+        </div>
+        
+        
+        <div class="carrier">
+            <div class="child">
+                <div class="image">1</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">2</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">3</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">4</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">5</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">6</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">7</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+            <div class="child">
+                <div class="image">8</div>
+                <p class="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </p>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const carrier = document.querySelector(".carrier");
+        const leftButton = document.querySelector(".left_btn");
+        const rightButton = document.querySelector(".right_btn");
+        const boxLength = document.querySelector(".box").clientWidth;
+        const carrierLength = carrier.clientWidth;
+        let carrierLeft = carrier.clientLeft;
+        const childLength = document.querySelector(".child").clientWidth + 20 ;
+
+
+        function checkLength() {
+            if ( carrierLength+carrierLeft <= boxLength ) {
+                rightButton.style.display = "none";
+            } else {
+                rightButton.style.display = "flex";
+            }
+            if ( carrierLeft >= 0 ) {
+                leftButton.style.display = "none";
+            } else {
+                leftButton.style.display = "flex";
+            }
+        }
+        checkLength();
+        function toLeftScroll(e) {
+            e.preventDefault();
+            let n = carrierLeft - childLength;
+            if ( carrierLength-(boxLength-carrierLeft) < childLength ) {
+                carrier.style.transform = `translateX(${boxLength-carrierLength}px)`;
+            } else {
+                carrier.style.transform = `translateX(${n}px)`;
+            }
+            carrierLeft = n;
+            checkLength();
+        }
+        function toRightScroll(e) {
+            e.preventDefault();
+            let i = carrierLeft + childLength;
+            if ( Math.abs(carrierLeft) < childLength ) {
+                carrier.style.transform = `translateX(0px)`;
+            } else {
+                carrier.style.transform = `translateX(${i}px)`;
+            }
+            carrierLeft = i;
+            checkLength();
+        }
+
+
+        rightButton.addEventListener("click",toLeftScroll);
+        leftButton.addEventListener("click", toRightScroll);
+    </script>
+</body>
+</html>

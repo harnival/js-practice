@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="practice(infinitescroll).css" />
+  </head>
+  <body>
+    <div class="container">
+      <dl class="slide">
+        <dt>1</dt>
+        <dt>2</dt>
+        <dt>3</dt>
+        <dt>4</dt>
+        <dt>5</dt>
+      </dl>
+    </div>
+  </body>
+
+  <script>
+    const container = document.querySelector(".container");
+    const slide = document.querySelector(".slide");
+    const dt = document.querySelectorAll(".slide dt");
+
+    const containerWidth = container.offsetWidth;
+    slide.style.width = `${(dt.length + 2) * containerWidth}px`;
+
+    const cloneFront = dt[0].cloneNode(true);
+    const cloneEnd = dt[dt.length - 1].cloneNode(true);
+
+    slide.appendChild(cloneFront);
+    slide.prepend(cloneEnd);
+
+    const newDt = document.querySelectorAll(".slide dt");
+    let index = 1;
+    let limit = 0;
+    slide.style.transform = `translateX(-${100 / newDt.length}%)`;
+    function reset() {
+      slide.style.transition = null;
+    }
+    function nextView() {
+      slide.style.transition = "1.5s ease";
+      limit++;
+      index += 1;
+
+      if (index == dt.length + 2) {
+        index = 1;
+        reset();
+        slide.style.transform = `translateX(-${(100 / newDt.length) * index}%)`;
+      } else {
+        slide.style.transform = `translateX(-${(100 / newDt.length) * index}%)`;
+      }
+
+      if (limit > 10) {
+        clearInterval(ooo);
+      }
+    }
+
+    const ooo = setInterval(nextView, 1500);
+  </script>
+</html>
