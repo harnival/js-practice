@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prac - keyboardmoving</title>
+    <script src="./src_03/jquery.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrap {
+            position: relative;
+            width: 100vw;
+        }
+        .out {
+            border: 2px solid #666;
+            box-sizing: border-box;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+        }
+        .in {
+            border: 2px solid black;
+            box-sizing: border-box;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+        }
+        .sample {
+            width: 30px;
+            height: 30px;
+            background-color: palegreen;
+            border-radius: 50%;
+            position: relative;
+            /* float: left; */
+            margin-left: 50px;
+            left: 50px;
+            top: 400px;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="out">
+            <div class="in"></div>
+        </div>
+    </div>
+    <div class="sample"></div>
+    <div class="sample"></div>
+    <div class="sample"></div>
+    <div class="sample"></div>
+    <div class="sample"></div>
+    <script>
+        $(function() {
+            const inR = 50;
+            const outR = 250;
+
+
+            let keypress = {};
+            let dist = 5;
+            let lg = 0;
+            let tg = 0;
+
+            $(document).keydown(function(e) {
+                keypress[e.which.toString()] = true;
+            });
+            $(document).keyup(function(e) {
+                keypress[e.which.toString()] = false;
+            });
+            
+            const set = setInterval(function() {    
+                let ol = $(".in").offset().left;
+                let ot = $(".in").offset().top;
+
+                    if (keypress['37'] && ol>0) {lg -= dist}
+                    if (keypress['38'] && ot>0) {tg -= dist}
+                    if (keypress['39'] && ol < 2*(outR-inR)) {lg += dist}
+                    if (keypress['40'] && ot < 2*(outR-inR)) {tg += dist}
+                   
+
+                    $(".in").css("transform","translate("+lg+"px,"+tg+"px)");
+               
+                if (Math.sqrt(lg*lg+tg*tg) >= (outR - inR)) {
+                    $(".in").css("background-color","black");
+                } else {
+                    $(".in").css("background-color","initial");
+
+                }
+            });
+            const eeeee = setInterval(function(){
+                if (keypress['81']) {
+                        const $new = $("<div class='sample'></div>");
+                        $new.animate({ top : "-=1000" },3000,"linear");
+                        $new.appendTo($("body"));
+                    }
+            },200);
+
+            let boxX = $(".out").offset().left + outR;
+            let boxY = $(".out").offset().top + outR;
+            let shotR = 15;
+            
+            $(".sample").animate({ top : "-=1000" },5000,"linear");
+
+            function calcul(a,b) {
+                return Math.sqrt( Math.pow(boxX - (a+shotR),2)+ Math.pow(boxY - (b+shotR),2));
+            }
+            const tests = setInterval( function() {
+                
+                $(".sample").each( function() {
+                    let qqq = $(this).offset().top;
+                    let www = $(this).offset().left;
+                    if(calcul(qqq,www) <= outR+shotR) {
+                        $(this).stop();
+                        $(this).detach();
+                    }
+                })
+            });
+            
+           
+                
+            
+
+
+        });
+
+
+    </script>
+</body>
+</html>

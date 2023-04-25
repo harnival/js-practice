@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./src_03/jquery.js"></script>
+    <style>
+        body, ul {
+            margin: 0px; padding: 0px; 
+        }
+        .wrap {
+            background-color: #bbb;
+            height: 500px;
+            padding-top: 60px;
+            margin-top: 100px;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+            position: relative;
+        }
+        li {
+            transition: 1s ease;
+        }
+        li img {
+            width: 400px;
+            height: 300px;
+        }
+        .slide {
+            width: 400px;
+            height: 300px;
+            margin: auto;
+        }
+        /* -------------------------------- */
+        .slot1 {
+            position: absolute;
+            top: -90px;
+            left: 60px;
+            filter: blur(1px) brightness(50%);
+            transform: scale(1,1) rotateX(30deg) rotateY(40deg);
+            z-index: 2;
+        }
+        .slot2 {
+            position: absolute;
+            top: -50px;
+            left: 0px;
+            filter: blur(1px) brightness(50%);
+            transform: scale(1,1) rotateX(30deg) rotateY(20deg);
+            z-index: 2;
+        }
+        .slot3 {
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            filter: blur(0px);
+            transform: scale(1,1) translateX(-300px);
+            z-index: 2;
+        }
+        .slot4 {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            filter: blur(1px) brightness(50%);
+            transform: scale(1,1) rotateX(30deg) rotateY(-20deg);
+            z-index: 2;
+        }
+        .slot5 {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            filter: blur(1px) brightness(50%);
+            transform: scale(1,1) rotateX(30deg) rotateY(-40deg);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="slide">
+            <ul class="slidecard">
+                <li>
+                    <img src="./img/01.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/02.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/03.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/04.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="./img/05.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="./img/06.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/01.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/02.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/03.jpg" alt="">
+                </li>
+                <li>
+                    <img src="./img/04.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="./img/05.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="./img/06.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <div class="button">
+            <a href="#none">go</a>
+            <a href="#none">back</a>
+        </div>
+    </div>
+
+    <script>
+        let key = 0;
+        let slotLen = 5;
+        let listLen = $(".cardlist li").length;
+        $(".slidecard li").each(function(i) {
+            if ( i < 5) {
+                $(this).addClass(`slot${i+1}`)
+            } else {
+                $(this).hide().addClass("slot5");
+            }
+        });
+        
+        $(".button a").first().click(function() {
+            key++;
+            $(".slidecard li").each(function(i) {
+                if (key <= i && i < key+5) {
+                    $(this).show();
+                    $(this).removeClass();
+                    $(this).addClass(`slot${i-key+1}`)
+                } else {
+                    $(this).hide()
+                }
+            });
+        });
+        $(".button a").last().click(function() {
+            key--;
+            $(".slidecard li").each(function(i) {
+                if (key <= i && i < key+5) {
+                    $(this).show();
+                    $(this).removeClass();
+                    $(this).addClass(`slot${i-key+1}`)
+                } else {
+                    $(this).hide()
+                }
+            });
+        })
+    
+
+    </script>
+</body>
+</html>

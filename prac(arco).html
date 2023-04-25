@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./src_03/jquery.js"></script>
+    <style>
+        .whole {
+            width: 900px;
+            height: 700px;
+            margin: auto;
+            position: relative;
+            border: 2px solid brown;
+            display: flex;
+        }
+        .box {
+           
+            height: 100%;
+            border: 2px dashed #666;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            transition: 1s ease;
+            width: 900px;
+            opacity: 1;
+        }
+        .door {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: left;
+        }
+        .textbox {
+            background-color: white;
+            width: calc(900px * 4/5);
+            height: 100%;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            display: none;
+        }
+        .close {
+            width: 50px;
+            opacity: 0.7;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="whole">
+        <div class="box">
+            <div class="door" style="background-image: url(./img/01.jpg);"></div>
+            <div class="textbox"></div>
+        </div>
+        <div class="box">
+            <div class="door" style="background-image: url(./img/02.jpg);"></div>
+            <div class="textbox"></div>
+        </div>
+        <div class="box">
+            <div class="door" style="background-image: url(./img/03.jpg);"></div>
+            <div class="textbox"></div>
+        </div>
+        <div class="box">
+            <div class="door" style="background-image: url(./img/04.jpeg);"></div>
+            <div class="textbox"></div>
+        </div>
+        <div class="box">
+            <div class="door" style="background-image: url(./img/05.jpeg);"></div>
+            <div class="textbox"></div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+
+            $(".box").click( function(){
+                if( $(this).hasClass("close")) {
+                    $(this).removeClass("close");
+                    $(".box").not($(this)).addClass("close");
+                } else {
+                    $(".box").not($(this)).toggleClass("close");
+                }
+            })
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qqq</title>
+    <script src="./src_03/jquery.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        ul,li {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+        a {
+            text-decoration: none;
+        }
+        /* ------------------ */
+        .whole {
+            margin-top: 100px;
+        }
+        .list img {
+            width: 500px;
+            height: 300px;
+        }
+        .list {
+            width: 500px;
+            height: 300px;
+        }
+        .wrap {
+            width: 500px;
+            overflow: hidden;
+            border: 3px solid #666;
+            box-sizing: border-box;
+            margin: auto;
+        }
+        .slide {
+            display: flex;
+            position: relative;
+            transition: 1s ease;
+        }
+        .numbers {
+            width: 500px;
+            text-align: center;
+            padding-top: 10px;
+            margin: auto;
+        }
+        .numbers a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="whole">
+        <div class="wrap">
+            <ul class="slide">
+                <li class="list">
+                    <img src="./img/01.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/02.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/03.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/01.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/02.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/03.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/01.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/02.jpg">
+                </li>
+                <li class="list">
+                    <img src="./img/03.jpg">
+                </li>
+            </ul>
+        </div>
+        <div class="numbers">
+            
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            $(".list").each(function(i){
+                const btn = $("<a href='#none'></a>");
+                btn.text(i+1);
+                btn.appendTo($(".numbers"));
+            })            
+            $(".numbers a").each(function(index) {
+                $(this).click( function() {
+                    const len = $(".list").width();
+                    $(".slide").css({
+                        transform: `translateX(-${len * (index)}px)`
+                    });
+                })
+            })
+
+        });
+    </script>
+</body>
+</html>

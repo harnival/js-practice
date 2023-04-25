@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .wrapwrap {
+            width: 100vw;
+            margin-top: 200px;
+            position: relative;
+        }
+        .wrap {
+            margin: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide {
+            width: 464px;
+            height: 260px;
+            box-sizing: border-box;
+            position: relative;
+            
+            overflow: hidden;
+
+        }
+        ul {
+            width: fit-content;
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            list-style: none;
+        }
+        .a2{
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 10px;
+            font-size: 50px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+
+            display: none;
+
+        }
+        .slideClone {
+            transform: scale(1.3,1.3);
+            position: absolute;
+            filter: blur(7px);
+        }
+        .ppp {
+            margin: 80px auto;
+            color: white;
+            text-align: center;
+            font-size: 50px;
+        }
+        img {
+            width: 464px;
+            height: 260px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapwrap">
+        <div class="wrap">
+            <div class="slide">
+                <ul>
+                    <li>
+                        <a href="#none" class="a1">
+                            <img src="../img/01.jpg" alt="">
+                        </a>
+                        <a href="#none" class="a2">
+                            <span>sample1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" class="a1">
+                            <img src="../img/02.jpg" alt="">
+                        </a>
+                        <a href="#none" class="a2">
+                            <span>sample2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" class="a1">
+                            <img src="../img/03.jpg" alt="">
+                        </a>
+                        <a href="#none" class="a2">
+                            <span>sample3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" class="a1">
+                            <img src="../img/04.jpeg" alt="">
+                        </a>
+                        <a href="#none" class="a2">
+                            <span>sample3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" class="a1">
+                            <img src="../img/05.jpeg" alt="">
+                        </a>
+                        <a href="#none" class="a2">
+                            <span>sample3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#none" class="a1">
+                            <img src="../img/06.jpg" alt="">
+                        </a>
+                        <a href="#none" class="a2">
+                            <span>sample3</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="ppp">
+            🍽🍴🥄
+        </p>
+    </div>
+    <script>
+        const ul = document.querySelector("ul");
+        const li = document.querySelectorAll("li");
+        const a1 = document.querySelectorAll(".a1");
+        const a2 = document.querySelectorAll(".a2");
+        
+        const slide = document.querySelector(".slide");
+        const wrap = document.querySelector(".wrap");
+        const slideClone = slide.cloneNode(true);
+        slideClone.classList.add("slideClone");
+        wrap.prepend(slideClone);
+
+        const uls = [ document.querySelector(".slideClone ul"), ul];
+        uls.forEach((ul) => {
+           
+                const len = li.length;
+                const frontClone = li[0].cloneNode(true);
+                const endClone = li[len-1].cloneNode(true);
+                ul.prepend(endClone);
+                ul.append(frontClone);
+                let i = 1;
+                ul.style.transform = `translateX(-${i*100/(len+2)}%)`;
+                
+                function slideToLeft() {
+                    if ( i == len+1 ) {
+                        i = 0;
+                        ul.style.transition = "";
+                        ul.style.transform = `translateX(-${i*100/(len+2)}%)`;
+                        i += 1;
+                    } else {
+                        ul.style.transform = `translateX(-${i*100/(len+2)}%)`;
+                        ul.style.transition = "transform 1s ease";
+                        i += 1;
+                    }
+                }
+                function slideToRight() {
+                    if ( i == 0 ) {
+                        i = len+1;
+                        ul.style.transition = "";
+                        ul.style.transform = `translateX(-${i*100/(len+2)}%)`;
+                        i -= 1;
+                    } else {
+                        ul.style.transform = `translateX(-${i*100/(len+2)}%)`;
+                        ul.style.transition = "transform 1s ease";
+                        i -= 1;
+                    }
+                }
+                const aaa = setInterval( slideToLeft, 2000 );
+  
+        })
+     
+
+        
+        
+
+        
+    </script>
+</body>
+</html>

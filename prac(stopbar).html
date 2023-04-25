@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        table {
+            border: 1px solid black;
+            margin: 100px auto;
+            border-spacing: 0px;
+        }
+        td {
+            width: 100px;
+            height: 50px;
+            background-color: white;
+        }
+        tr {
+            height: 100px;
+        }
+        /* -------------- */
+        .good {
+            background-color: wheat;
+        }
+        .great {
+            background-color: brown;
+        }
+        .catch {
+            background-color: black;
+        }
+        p {
+            font-size: 20px;
+            margin-left: 100px;
+        }
+        /* ======================case.2============== */
+        .wrap {
+            width: 100vw;
+            height: 100px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .goodbox {
+            position: absolute;
+            left: 300px;
+            width: 350px;
+            height: 100%;
+            background-color: wheat;
+        }
+        .greatbox {
+            width: 50px;
+            height: 100%;
+            background-color: brown;
+            position: absolute;
+            left: 100px;
+        }
+        .control {
+            width: 2px;
+            height: 100%;
+            background-color: black;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="a1">
+        <h2>case.1</h2>
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="good"></td>
+                <td class="great"></td>
+                <td class="great"></td>
+                <td class="great"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <p class="score"></p>
+    </div>
+
+
+    <hr>
+
+    <div class="a2">
+        <h2>case.2</h2>
+        <div class="wrap">
+            <div class="goodbox">
+                <div class="greatbox"></div>
+            </div>
+            <div class="control"></div>
+        </div>
+        <p class="result"></p>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function(){
+
+            const len = $("td").length;
+            let i = 0
+            let j = true;
+
+                var set;
+                function run1() {
+                    set = setInterval(function(){
+                        if (i == 0) {j=true}
+                        if (i == len-1) {j=false}
+                        if(j) {
+                            $(`td:eq(${i})`).addClass("catch");
+                            $(`td:eq(${i-1})`).removeClass("catch");
+                            i++;
+                        } else {
+                            $(`td:eq(${i-1})`).addClass("catch");
+                            $(`td:eq(${i})`).removeClass("catch");
+                            i--;
+                        }
+                    },10);
+                }
+            
+
+            function stop1() {
+                clearInterval(set);
+                if( $(".catch").hasClass("good") ) { $("p").text("good")}
+                else if( $(".catch").hasClass("great") ) { $("p").text("great")}
+                else {$("p").text("bad")}
+
+                set = null;
+            };
+
+            $(document).keydown(function(e) {
+                if(e.which==32) {
+                    if(!set) {run1()}
+                    else {stop1()}
+                }
+            });
+
+            run1();
+            
+
+            // ========================================
+
+            const wrapLen = $(".wrap").width();
+            const goodLen = $(".goodbox").width();
+            const goodLeft = $(".goodbox").offset().left;
+            const greatLen = $(".greatbox").width();
+            const greatLeft = $(".greatbox").offset().left;
+            const initLeft = $(".control").offset().left;
+            function runit() {
+                
+                $(".control").animate({
+                    left: `${wrapLen}`
+                },1500).animate({
+                    left: "0"
+                },1500,runit)
+            };
+            function stopit() {
+                let t = $(".control").offset().left;
+
+                $(".control").stop(true,false);
+                if (greatLeft<t && t<greatLeft+greatLen) {
+                    return $(".result").text("great");
+
+                } else if (goodLeft<t && t<goodLeft+goodLen) {
+                    return $(".result").text("good")
+                } else {return $(".result").text("bad")}
+
+                $(".control").css("left",`${initLeft}px`);
+            }
+            let k2 = false; 
+            $(document).keydown(function(e) {
+                if(e.which==32) {
+                    if(k2) {runit()}
+                    else {stopit()}
+                    k2 = !k2;
+                }
+            });
+            runit();
+        });
+    </script>
+</body>
+</html>
