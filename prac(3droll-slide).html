@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./src_03/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         ul, body {
             list-style: none;
@@ -15,6 +15,39 @@
         body {
             background-color: #222;
         }
+        .wrap {
+            width: 90%;
+            height: 90vh;
+            border: 2px solid white;
+            position: relative;
+            margin: 10px auto;
+        }
+        a {
+            display: block;
+            width: 50px;
+            height: 30px;
+            font-size: 30px;
+            text-decoration: none;
+            color: white;
+            background-color: darkgray;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 10px 0px;
+        }
+        button {
+            border: none;
+            border-radius: 20px;
+            background-color: white;
+
+            width: 60px;
+        }
         li {
             width: 300px;
             height: 200px;
@@ -23,105 +56,118 @@
             font-weight: 500;
             text-align: center;
             box-sizing: border-box;
+            transition: .7s ease;
             position: absolute;
+        }
+        /* -----------------------------1. right--------------------------------------- */
+        .right li {
             transform-origin: 110% 0%;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.637);
-            transition: .7s ease;
         }
-        ul {
+        .right {
             perspective-origin: top right;
             perspective: 1800px;
             width: 100px;
-            position: relative;
-            top: 300px;
-            left: 400px;
+            position: absolute;
+            top: 50%;
+            right: 250px;
         }
-        a {
-            display: block;
+        /* --------------------------------2. left------------------------------- */
+        .left {
+            perspective-origin: top left;
+            perspective: 1800px;
             width: 100px;
-            height: 50px;
-            font-size: 30px;
-            text-decoration: none;
-            color: white;
-            background-color: darkgray;
-            border-radius: 30px;
-            margin: 50px 0px 0px 50px;
+            position: absolute;
+            top: 50%;
+            left: 20px;
+        }
+        .left li {
+            transform-origin: -10% 0%;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.637);
         }
     </style>
 </head>
 <body>
-   
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <!-- ------------- -->
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <a href="#none">go</a>
+    <div class="btn">
+        <button type="button" class="btn_left">left</button>
+        <button type="button" class="btn_right">right</button>
+        <button type="button" class="btn_top">top</button>
+        <button type="button" class="btn_bottom">bottom</button>
+        <a href="#none">roll</a>
+    </div>
+    <div class="wrap">
+        <ul class="right">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <!-- ------------- -->
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    
     <script>
         $(function(){
             const len = $("li").length;
             let key = 0;
-            $("li").each(function(i) {
-                $(this).text("sample "+ i);
-                $(this).css({
-                    transform: `rotateY(${-90 + i*180/len}deg)`,
-                    top: `${3*i}px`,
-                    // right: `${i<len/2?  5*i: 5*(len-i)}px`
-                });
-                if(i== Math.floor(len/2)) {
-                    $(this).css({
-                        filter: "none",
-                        top: '-=200'
-                    })
-                } else {
-                    $(this).css({
-                        filter: "blur(2px) brightness(80%)"
-                    })
-                }
-            });
 
+            
             $("a").click(function() {
-                if ( key >= len-1) {
-                    key = 0;
-                } else {
-                    key++;
-                }
-                $("li").each(function(i) {
+                if ( key >= len-1) { key = 0; }
+                else { key++; }
+                $(".right li").each(function(i) {
                     const q = (i+key)%(len);
                     $(this).text("sample "+ i);
 
-                    if (q===0) {
-                        $(this).hide();
-                    } else {
-                        $(this).show()
-                    }
+                    if (q===0) { $(this).hide()} 
+                    else { $(this).show() }
+
                     $(this).css({
                         transform: `rotateY(${-90 + q*180/len}deg)`,
                         top: `${3*q}px`,
-                        // right: `${q<len/2? 5*i: 5*(len-q)}px`,
                         zIndex: q
                     });
 
+                    if(q== Math.floor(len/2)) {
+                        $(this).css({
+                            filter: "none",
+                            top: '-=200'
+                        })
+                    } else {
+                        $(this).css({
+                            filter: "blur(2px) brightness(80%)"
+                        })
+                    }
+                });
+                $(".left li").each(function(i) {
+                    const q = (i+key)%(len);
+                    $(this).text("sample "+ i);
 
+                    if (q===0) { $(this).hide()} 
+                    else { $(this).show() }
+
+                    $(this).css({
+                        transform: `rotateY(${90 - q*180/len}deg)`,
+                        top: `${3*q}px`,
+                        zIndex: q
+                    });
 
                     if(q== Math.floor(len/2)) {
                         $(this).css({
@@ -135,6 +181,60 @@
                     }
                 });
             })
+            // 1. right
+            $(".btn_right").click(rightRoll);
+
+            function rightRoll() {
+                $("ul").removeClass();
+                $("ul").addClass("right");
+                $("li").css("top","initial");
+                key = 0;
+                $(".right li").each(function(i) {
+                    $(this).text("sample "+ i);
+                    $(this).css({
+                        transform: `rotateY(${-90 + i*180/len}deg)`,
+                        top: `${3*i}px`,
+                    });
+                    if(i== Math.floor(len/2)) {
+                        $(this).css({
+                            filter: "none",
+                            top: `-=200`
+                        })
+                    } else {
+                        $(this).css({
+                            filter: "blur(2px) brightness(80%)"
+                        })
+                    }
+                });
+            }
+
+            //2.left
+            $(".btn_left").click(leftRoll);
+
+            function leftRoll() {
+                $("ul").removeClass();
+                $("ul").addClass("left");
+                key = 0;
+                $(".left li").each(function(i) {
+                    $(this).text("sample "+ i);
+                    $(this).css({
+                        transform: `rotateY(${90 - i*180/len}deg)`,
+                        top: `${3*(i)}px`,
+                        zIndex: i
+                    });
+                    if(i== Math.floor(len/2)) {
+                        $(this).css({
+                            filter: "none",
+                            top: `-=200`
+                        })
+                    } else {
+                        $(this).css({
+                            filter: "blur(2px) brightness(80%)"
+                        })
+                    }
+                });
+            }
+           
         });
     </script>
 </body>
