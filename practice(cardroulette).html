@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pageWheel</title>
+    <style>
+        :root {
+            --card-width : 30vw;
+            --card-aspect : 2/1;
+        }
+        body {
+            margin: 0px; padding: 0px;
+        }
+        ul,li {margin: 0px; padding:0px; list-style: none;}
+        main {
+            height: 100vh;
+            background-color: wheat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        /* --------------------------------- */
+        ul {
+            width: var(--card-width);
+            aspect-ratio: var(--card-aspect);
+            position: relative;
+            transform-origin: -100% center;
+        }
+        li {
+            transition: .9s ease;
+            transform-origin: -100% center;
+            width: var(--card-width);
+            aspect-ratio: var(--card-aspect);
+            background-color: white;
+            box-shadow: 2px 1px 5px #666;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <ul>
+           
+        </ul>
+    </main>
+
+    <script>
+        const ul = document.querySelector("ul");
+        const liNumber = 24;
+        const half = Math.floor(liNumber/2);
+        for( let i=0; i<liNumber; i++) {
+            const $li = document.createElement("li");
+            ul.append($li);
+        }
+
+        const main = document.querySelector("main");
+        const li = document.querySelectorAll("li");
+        const deg = 360 / li.length;
+        li.forEach(function(v,i){
+            v.innerHTML = `<h2 style='margin:0px; padding:0px;'>SAMPLE ${liNumber-i}</h2>`
+            v.style.transform = `rotateZ(${i * deg}deg)`;
+        })
+
+        let r = 0;
+        main.addEventListener("wheel",function(e){
+            const set = new WheelEvent("wh",{
+                deltaY : e.deltaY/100
+            })
+            r += set.deltaY;
+            
+            let q = r%liNumber <= 0? liNumber+r%liNumber : r%liNumber;
+            console.log(q,r)
+            li.forEach((v,i) => {
+                v.style.transform = `rotateZ(${(i+r)*deg}deg)`
+                const w = i%liNumber;
+                v.style.zIndex = ((i+r)%liNumber+half)%liNumber
+                if( liNumber-i == q) {
+                    v.style.left = "100%"
+                } else {
+                    v.style.left = "0"
+                }
+            })
+
+
+        })
+    </script>
+</body>
+</html>
