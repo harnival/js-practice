@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --box-width: 200px;
+            --radial-length: calc(400px * 3.14 / 12)
+        }
+        body {padding: 0px; margin: 0px; font-size: 16px; font-weight: 600; overflow: hidden;}
+        .main {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 500px;
+        }
+        body .hide {
+            display: none;
+        }
+        .boxWrap {
+            width: var(--box-width);
+            aspect-ratio: 1/1;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        .box {
+            width: var(--box-width);
+            aspect-ratio: 1/1;
+            border: 1px solid #aaa;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            
+        }
+        .front {
+            background-color: violet;
+            transform: translateZ(100px);
+        }
+        .behind {
+            background-color: palegoldenrod;
+            transform: rotateY(180deg) translateZ(100px);
+        }
+        .left {
+            background-color: pink;
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        .right {
+            background-color: skyblue;
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        .top {
+            background-color: yellow;
+            transform: rotateX(90deg) translateZ(100px);
+        }
+        .bottom {
+            background-color: greenyellow;
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+        /* -------------------------------------------------- */
+        .boxWrap2 {
+            width: 400px;
+            aspect-ratio: 1/1;
+            transform-style: preserve-3d;
+        }
+        .box2 {
+            width: calc(400px / 2);
+            height: 100%;
+            border: 1px solid #aaa;
+            box-sizing: border-box;
+            position: absolute;
+            background: radial-gradient(circle at 100%,rgb(184, 135, 135) 40%,white 54%,#aaa 55%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: top right;
+            clip-path: circle(50% at right);
+
+            box-shadow: -3px 3px 5px 0px black;
+        }
+        .qqq {
+           width: 0px;
+           height: 400px;
+           position: relative;
+           transform-style: preserve-3d;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+        }
+        .box3 {
+            /* border: 1px solid black; */
+            /* background-color: tomato; */
+            /* width: calc(400px * 3.14 / 15); */
+            height: 100%;
+            position: absolute;
+        }
+        
+        .circle {
+            width: 400px;
+            aspect-ratio: 1/1;
+            position: absolute;
+            border-radius: 50%;
+            background-color: tomato;
+            transform: rotateX(90deg) translateZ(-200px);
+        }
+        @keyframes roll{
+            from{ transform: rotateY(0deg);}
+            to{ transform: rotateY(360deg);}
+        }
+        .roll {
+            transform-style: preserve-3d;
+            animation: roll 2s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="boxWrap ">
+            <div class="box front">front</div>
+            <div class="box behind">behind</div>
+            <div class="box left">left</div>
+            <div class="box right">right</div>
+            <div class="box top">top</div>
+            <div class="box bottom">bottom</div>
+        </div>
+        <div class="boxWrap2 hide"></div>
+        <div class="qqq qqq1 hide">
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+            <div class="box3"></div>
+        </div>        
+            <div class="qqq qqq2 hide">
+                <div class="circle"></div>
+            </div>
+    </div>
+
+    <script>
+        const main = document.querySelector(".main");
+        const box = document.querySelector(".boxWrap");
+        let q;
+        document.addEventListener("mousedown",function(){q = true;})
+        document.addEventListener("touchstart",function(){q = true;})
+        document.addEventListener("mouseup",function(){q = false;})
+        document.addEventListener("touchend",function(){q = false;})
+
+        let x=0,y=0;
+        function move(e) {
+            if(q) {
+                const mx = e.movementX, my = e.movementY;
+                x += mx;
+                y += my;
+                box.style.transform = `rotateX(${-y * 0.7}deg) rotateY(${x * 0.7}deg)`
+                boxWrap2.style.transform = `rotateX(${-y * 0.7}deg) rotateY(${x * 0.7}deg)`
+                qqq.style.transform = `rotateX(${-y * 0.7}deg) rotateY(${x * 0.7}deg)`
+                qqq2.style.transform = `rotateX(${-y * 0.7}deg) rotateY(${x * 0.7}deg)`
+            }
+        }
+        document.addEventListener("mousemove",function(e){move(e)});
+        document.addEventListener("touchmove",function(e){move(e)});
+        let del=1;
+        document.addEventListener("wheel",function(e){
+            const delY = e.deltaY;
+            del += delY*0.001;
+            main.style.transform = `scale(${del},${del})`
+        })
+        const qqq = document.querySelector(".qqq");
+        // ---------------------------------------------------------------
+        const boxLen = 10;
+        const deg = 360 / boxLen; 
+        
+        const boxWrap2 = document.querySelector(".boxWrap2");
+        const box2 = document.querySelectorAll(".box2");
+        for(let i=0; i < boxLen; i++) {
+            const tx = document.createElement("div");
+            tx.classList.add("box2");
+            tx.style.transform = `rotateY(${deg*i}deg)`
+            boxWrap2.appendChild(tx);
+        }
+        // -----------------------------------------------------
+        const box3 = document.querySelectorAll(".qqq1 .box3");
+        const box3Len = 30;
+        const qqq2 = document.querySelector(".qqq2");
+
+        for(let i=0; i < box3Len; i++) {
+            const $box3 = document.createElement("div")
+            $box3.classList.add("box3");
+            qqq2.appendChild($box3);
+            const r = i > box3Len/2? box3Len-i : i;
+            const rr = r * 255/box3Len;
+            $box3.style.width = `calc(400px * 3.14 / ${box3Len})`
+            $box3.style.transform = `rotateY(${i* 360/box3Len}deg) translateZ(200px)`
+            $box3.style.background = `rgb(${rr},${rr},${rr}) linear-gradient(to bottom, transparent 50%, black)`
+        }
+        box3.forEach((v,i) => {
+            const r = i > 15/2? 15-i : i;
+            const rr = r * 255/15;
+            v.style.transform = `rotateY(${i* 360/15}deg) translateZ(200px)`
+            v.style.background = `rgb(${rr},${rr},${rr}) linear-gradient(to bottom, transparent 50%, black)`
+        })
+    </script>
+</body>
+</html>
