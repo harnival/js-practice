@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/project3/manifest.json">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Document</title>
+    <style>
+        body {margin: 0px; padding: 0px; font-size: 16px; display: flex; justify-content: center;}
+        a {text-decoration: none; color: initial;}
+        ul,li {list-style: none; padding: 0px; margin: 0px;}
+        dl,dt,dd{padding: 0px; margin: 0px;}
+        /* --------------------------------------------- */
+        .loading {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0px; left: 0px;
+            background: linear-gradient(60deg, rgb(201, 29, 29) 10%,pink,rgba(216, 112, 147, 0.521) 70%), linear-gradient(150deg, royalblue 10%,paleturquoise,rgba(0, 0, 255, 0.479) 60%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .cloudBox {
+            width: max(30vw, 700px);
+            aspect-ratio: 2;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 300%;
+            font-weight: 600;
+            box-sizing: border-box;
+        }
+        .clouds {
+            position: absolute;
+            left:100%
+        }
+        .main {
+            position: relative;
+            width: 100%;
+        }
+        .listWrap {
+            border: 2px dashed #666;
+            width: 20vw;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+            
+        }
+        .list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .imageBox {
+            width: 47%;
+            aspect-ratio: 1/1;
+            background-color: #aaa;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .imageA {
+            display: block;
+            width: 100%;
+            transition: .5s ease;
+        }
+        .imageA:hover {
+            transform: scale(1.1,1.1);
+            opacity: 0.8;
+        }
+        .images {
+            display: block;
+            width: 100%;
+        }
+        .draw {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10%;
+            width: 50vw;
+            aspect-ratio: 3/2;
+            border: 2px dashed #666;
+            display: flex;
+        }
+        .loadImg {
+            background-color: wheat;
+        }
+        .btn {
+            width: 10%;
+            height: 100%;
+            background-color: tomato;
+        }
+        .canvasWrap {
+            width: 90%;
+            height: 100%;
+        }
+        .canvases {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: aqua;
+        }
+        .colors a{
+            display: block;
+        }
+        .linewidth {
+            display: flex;
+            flex-direction: column;
+        }
+        .loadImg, .drawingTool {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        
+        .result {
+            border: 1px dashed tomato;
+            width: 40vw;
+            height: 40vw;
+        }
+        .result canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .drawingTool {
+            background-color: rgba(0,0,0,0.3);
+        }
+        /* ---------------------------------------- */
+        
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="cloudBox">LOADING...</div>
+    </div>
+    <!--  -->
+    <div class="main">
+        <div class="listWrap">
+            <div class="list"></div>
+        </div>
+        <div class="draw">
+            <div class="btn">
+                <div class="colors">
+                    <a href="#none" data-color="black" class="colorBtn color_black">black</a>
+                    <a href="#none" data-color="red" class="colorBtn color_red">red</a>
+                    <a href="#none" data-color="blue" class="colorBtn color_blue">blue</a>
+                    <a href="#none" data-color="green" class="colorBtn color_green">green</a>
+                    <a href="#none" data-color="transparent" class="colorBtn erase">transparent</a>
+                </div>
+                <div class="linewidth">
+                    <input type="range" id="linenum" max="30" min="3">
+                    <label for="linenum"></label>
+                </div>
+                <div class="opac">
+                    <input type="range" id="opacnum" max="1" min="0" step="0.1">
+                    <label for="opacnum"></label>
+                </div>
+                <div class="merge">
+                    <a href="#none">merge</a>
+                </div>
+            </div>
+            <div class="canvasWrap">
+                <div class="canvases">
+                    <canvas class="loadImg"></canvas>
+                    <canvas class="drawingTool"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="result">
+            <canvas></canvas>
+        </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+</body>
+</html>

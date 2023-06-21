@@ -1,0 +1,57 @@
+{
+    "name": "project3",
+    "short_name": "pj3",
+    "description": "start for project3",
+    "scope": "/",
+    "start_url": "/project3/",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "theme_color": "#00a183",
+    "background_color": "rgb(0,183,0)",
+    "icons": [
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {"name": "title",
+        "short_name": "short title",
+        "url" : "/",
+        "description": "sample text",
+        "icons": [
+            {
+                "src": "/android-chrome-512x512.png",
+                "sizes": "512x512",
+                "type": "image/png"
+            },
+            {
+                "src": "/favicon-16x16.png",
+                "sizes": "16x16",
+                "type": "image/png"
+            }
+        ]},
+        {"name": "title2",
+        "short_name": "short title2",
+        "url" : "/",
+        "description": "sample text2",
+        "icons": [
+            {
+                "src": "/android-chrome-512x512.png",
+                "sizes": "512x512",
+                "type": "image/png"
+            },
+            {
+                "src": "/favicon-16x16.png",
+                "sizes": "16x16",
+                "type": "image/png"
+            }
+        ]}
+    ]
+}
