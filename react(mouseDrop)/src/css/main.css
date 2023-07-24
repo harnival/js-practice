@@ -1,0 +1,7 @@
+.mainboxbox {
+    width: 10vw;
+    height: 10vw;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.39);
+    position: absolute;
+}
